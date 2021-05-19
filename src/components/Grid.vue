@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
     <p>
+
+          <button v-on:click="populaTabela">Popula Tabela</button>
+
           <b-table 
             striped hover 
             :items="dto"  
@@ -43,6 +46,14 @@ export default {
           }
       ],
       dto: [
+            
+          ]
+    }
+  },
+  
+  methods: {
+    populaTabela(){
+      this.dto = [
             {
               "nome": "Henrique",
               "idade": 58
@@ -71,12 +82,8 @@ export default {
               "nome": "Natalia",
               "idade": 18
             }
-          ]
+      ];
     }
-  },
-  
-  methods: {
-    
   },
 
   computed: {
