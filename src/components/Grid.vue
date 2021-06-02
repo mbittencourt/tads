@@ -1,8 +1,13 @@
 <template>
   <div class="hello">
+
+    
+
     <p>
 
           <button v-on:click="populaTabela">Popula Tabela</button>
+
+          <button v-on:click="populaTabelaPorAPI">Popula Tabela API</button>
 
           <b-table 
             striped hover 
@@ -24,6 +29,9 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -34,14 +42,17 @@ export default {
     return {
       registroPorPagina: 3,
       paginaAtual: 1,
-
       campos: [
           {
-            key: 'nome',
+            key: 'id',
             sortable: true
           },
           {
-            key: 'idade',
+            key: 'name',
+            sortable: true
+          },
+          {
+            key: 'email',
             sortable: true
           }
       ],
@@ -52,40 +63,69 @@ export default {
   },
   
   methods: {
+    
+    populaTabelaPorAPI(){
+      
+      axios
+      .get('https://jsonplaceholder.typicode.com/users')
+      .then(response => {
+        
+        this.dto = response.data;
+        
+        
+      });
+    },
     populaTabela(){
       this.dto = [
             {
-              "nome": "Henrique",
-              "idade": 58
+              "name": "Henrique",
+              "id": 58,
+              "email": "email58@gmail.com"
             },
             {
-              "nome": "Charles",
-              "idade": 39
+              "name": "Charles",
+              "id": 39,
+              "email": "email39@gmail.com"
             },
             {
-              "nome": "Keven",
-              "idade": 47
+              "name": "Keven",
+              "id": 47,
+              "email": "email47@gmail.com"
             },
             {
-              "nome": "Messias",
-              "idade": 18
+              "name": "Messias",
+              "id": 18,
+              "email": "email18@gmail.com"
             },
             {
-              "nome": "Gustavo",
-              "idade": 57
+              "name": "Gustavo",
+              "id": 57,
+              "email": "email57@gmail.com"
             },
             {
-              "nome": "Carlos Augusto",
-              "idade": 48
+              "name": "Carlos Augusto",
+              "id": 48,
+              "email": "email48@gmail.com"
             },
             {
-              "nome": "Natalia",
-              "idade": 18
+              "name": "Natalia",
+              "id": 18,
+              "email": "email18@gmail.com"
             }
       ];
     }
   },
-
+  created(){
+   axios
+      .get('https://jsonplaceholder.typicode.com/users')
+      .then(response => {
+        
+       
+        this.dto = response.data;
+        
+        
+      });
+  },
   computed: {
       rows() {
         return this.dto.length
