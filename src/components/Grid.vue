@@ -9,6 +9,10 @@
 
           <button v-on:click="populaTabelaPorAPI">Popula Tabela API</button>
 
+          <button v-on:click="botaoNovo">Novo</button>
+
+          <button v-on:click="logout">Logout</button>
+
           <b-table 
             striped hover 
             :items="dto"  
@@ -31,6 +35,7 @@
 <script>
 
 import axios from 'axios'
+import router from '../router'
 
 export default {
   name: 'HelloWorld',
@@ -52,7 +57,7 @@ export default {
             sortable: true
           },
           {
-            key: 'email',
+            key: 'phone',
             sortable: true
           }
       ],
@@ -63,15 +68,22 @@ export default {
   },
   
   methods: {
-    
+
+    botaoNovo(){
+      router.push("/novo");
+    },
+    logout(){
+      debugger; // eslint-disable-line no-debugger
+      localStorage.removeItem('user');
+      router.push("/novo");
+    },
     populaTabelaPorAPI(){
       
       axios
       .get('https://jsonplaceholder.typicode.com/users')
       .then(response => {
-        
+        debugger; // eslint-disable-line no-debugger
         this.dto = response.data;
-        
         
       });
     },

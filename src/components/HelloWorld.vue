@@ -19,6 +19,10 @@
 </template>
 
 <script>
+
+import router from '../router'
+
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -40,7 +44,7 @@ export default {
       }     
     },
     voltar: function () {  
-      alert('Clicou no botão voltar.')
+      router.push("/grid");
     }
   }
 

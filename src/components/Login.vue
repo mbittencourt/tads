@@ -9,7 +9,7 @@
         Login: <input v-model="loginDTO.login" placeholder="Login">
     </p>
     <p>
-        Senha: <input v-model="loginDTO.senha" placeholder="Senha">
+        Senha: <input v-model="loginDTO.senha" placeholder="Senha" type="password">
     </p>
     <p>
         <button v-on:click="enviaDados">Login</button>
@@ -18,7 +18,10 @@
 </template>
 
 <script>
-import axios from 'axios'
+
+
+
+import router from '../router'
 
 
 export default {
@@ -36,15 +39,12 @@ export default {
   methods: {
     enviaDados(){
       
-      const objetoEnvio = { login: this.loginDTO.login , senha: this.loginDTO.senha };    
-
-        axios
-        .post("https://reqres.in/api/articles", objetoEnvio)
-        .then(
-          response => {
-            this.articleId = response.data.id;
-          }
-        );
+        if(this.loginDTO.login == 'user' && this.loginDTO.senha == 'user'){
+          localStorage.setItem('user', "usuarioOk");
+          router.push("/grid")
+        }else{
+          alert('Usuario e/ou senha invalida.');
+        }
     },
     
   }
